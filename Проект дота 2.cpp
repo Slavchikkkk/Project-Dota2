@@ -199,12 +199,12 @@ void DPC::major(Team& team) {
 
     cout << "Starting a major\n";
     for (int i = 0; i < 3; i++) {
-        // вот здесь мы каждый раз убираем 7 героев
+        // ось тут ми кожен раз забираємо 7 героїв
         for (int k = 0; k < 7; k++) {
             int v = random(0, 39);
             exclude.push_back(v);
         }
-        // вывод чисто для мониторинга и демонстрации работы
+        // вивід для моніторингу і демонстрації роботи
         cout << "Excluded heroes are: ";
         for (int k = 0; k < exclude.size(); k++) {
             cout << heroes_list[exclude[k]] << "; ";
@@ -232,7 +232,7 @@ void Team::choose_name() {
     cin >> name;
 }
 
-// здесь мы выбираем героев, исключая из возможных героев ребять из массива exclude
+// тут ми вибираємо героїв, виключаючи з можливих героїв заборониних героїв из массива exclude
 void Team::choose_hero(vector<int> exclude) {
     int i = 0;
     bool is_here;
