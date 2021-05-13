@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <time.h>
@@ -199,12 +199,12 @@ void DPC::major(Team& team) {
 
     cout << "Starting a major\n";
     for (int i = 0; i < 3; i++) {
-        // ось тут ми кожен раз забираємо 7 героїв
+        // вот здесь мы каждый раз убираем 7 героев
         for (int k = 0; k < 7; k++) {
             int v = random(0, 39);
             exclude.push_back(v);
         }
-        // вивід для моніторингу і демонстрації роботи
+        // вывод чисто для мониторинга и демонстрации работы
         cout << "Excluded heroes are: ";
         for (int k = 0; k < exclude.size(); k++) {
             cout << heroes_list[exclude[k]] << "; ";
@@ -232,7 +232,7 @@ void Team::choose_name() {
     cin >> name;
 }
 
-// тут ми вибираємо героїв, виключаючи з можливих героїв заборониних героїв из массива exclude
+// здесь мы выбираем героев, исключая из возможных героев ребять из массива exclude
 void Team::choose_hero(vector<int> exclude) {
     int i = 0;
     bool is_here;
@@ -257,8 +257,27 @@ void Team::choose_hero(vector<int> exclude) {
 }
 
 void Team::choose_role() {
-    for (int i = 0; i < 5; i++) {
-        team[i].role = roles[random(0, 4)];
+    vector<int> list;
+    list.push_back(6);
+    bool is_here = false;
+    int i = 0;
+
+    int r;
+    while (i < 5) {
+        int r = random(0, 4);
+        for (int k = 0; k < list.size(); k++) {
+            if (r == list[k]) {
+                is_here = true;
+                break;
+            }
+            else is_here = false;
+        }
+
+        if (is_here == false) {
+            team[i].role = roles[r];
+            list.push_back(r);
+            i++;
+        }
     }
 }
 
@@ -316,6 +335,7 @@ void The_International::TI(Team& team) {
             cout << heroes_list[exclude[k]] << "; ";
         }
         cout << endl;
+        team.choose_hero(exclude);
 
         if (stats > team.exp) cout << "Your team was defeated(\n";
         else cout << "You won!\n";
@@ -392,17 +412,17 @@ void Coach::TI(Team& team) {
     int matches;
     // проверка на участие в турнире выше
     if (!team.major_participation) {
-        cout << "You haven`t visited major, now it is a chance to\n";
+        cout << "You haven`t visited major, now you are about participating in qualifications\n";
         cout << "How many matches do you want to have?\n";
         cin >> matches;
         team.international_invite.qualification(team, matches);
         team.major_participation = true;
-    }
 
-    cout << "Do you need analytics?\n";
-    cin >> answ;
-    if (answ == 'y' || answ == 'Y') {
-        start_ananytics(team);
+        cout << "Do you need analytics?\n";
+        cin >> answ;
+        if (answ == 'y' || answ == 'Y') {
+            start_ananytics(team);
+        }
     }
 
     team.international_invite.TI(team);
