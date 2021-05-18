@@ -14,12 +14,13 @@ class The_International;
 class Support;
 class Player;
 int stats;
+class DCP;
 
-string heroes_list[40] = { "Lina", "Monkey King", "Phantom Assasin", "Pudge", "Sniper", "Windranger", "Axe", "Bloodseeker",
-"Crystal Maiden", "Bristleback", "Bounty Hunter", "Bane", "Broodmother", "Anti-Mage", "Abaddon", "Drow Ranger", "Invoker",
-"Legion Commander", "Luna", "Nature`s Prophet", "Witch Doctor", "Chen", "Pepuga", "Ursa", "Batrider", "Razor", "Lone Druid",
-"Slark", "Hoodwink", "Troll Warlord", "Phantom Lancer", "Meepo", "Terrorblade", "Naga Siren", "Weaver", "Viper", "Riki",
-"Lifestealer", "Sven", "Io" };
+string heroes_list[40] = {"Lina", "Monkey King", "Phantom Assasin", "Pudge", "Sniper", "Windranger", "Axe", "Bloodseeker", 
+"Crystal Maiden", "Bristleback", "Bounty Hunter", "Bane", "Broodmother", "Anti-Mage", "Abaddon", "Drow Ranger", "Invoker", 
+"Legion Commander", "Luna", "Nature`s Prophet", "Witch Doctor", "Chen", "Pepuga", "Ursa", "Batrider", "Razor", "Lone Druid", 
+"Slark", "Hoodwink", "Troll Warlord", "Phantom Lancer", "Meepo", "Terrorblade", "Naga Siren", "Weaver", "Viper", "Riki", 
+"Lifestealer", "Sven", "Io"};
 
 int random(int min, int max) {
     int num = min + rand() % (max - min + 1);
@@ -27,124 +28,122 @@ int random(int min, int max) {
 }
 
 class Player {
-public:
-    string name;
-    string role;
-    string nickname;
-    string hero;
+    public:
+        string name;
+        string role;
+        string nickname;
+        string hero;
 };
 
 class DPC {
-public:
-    void major(Team& team);
-    void bootcamp(Team& team);
+    public:
+        void major(Team& team);
+        void bootcamp(Team& team);
 };
 
 class Support {
     string dinner_set;
     string sport_type;
     string psychologist;
-public:
-    void physical();
-    void dinner();
-    void sport();
-    void psychology();
+    public:
+        void physical();
+        void dinner();
+        void sport();
+        void psychology();
 };
 
-void Support::physical() {
+void Support::physical(){
     dinner();
     sport();
 }
 
-void Support::dinner() {
+void Support::dinner(){
     int answ;
     cout << "Choose cuisine:\n1. Japanese\n2. Korean\n3. Ukrainian\n4. American\n5. Italian\n";
     cin >> answ;
-    switch (answ) {
-    case 1: {
-        dinner_set = "Japanese";
-        break; }
-    case 2: {
-        dinner_set = "Korean";
-        break; }
-    case 3: {
-        dinner_set = "Ukrainian";
-        break; }
-    case 4: {
-        dinner_set = "American";
-        break; }
-    case 5: {
-        dinner_set = "Italian";
-        break; }
-    default: dinner();
+    switch(answ){
+        case 1: {
+            dinner_set = "Japanese";
+            break; }
+        case 2: {
+            dinner_set = "Korean";
+            break; }
+        case 3: {
+            dinner_set = "Ukrainian";
+            break; }
+        case 4: {
+            dinner_set = "American";
+            break; }
+        case 5: {
+            dinner_set = "Italian";
+            break; }
+        default: dinner();
     }
 }
 
-void Support::sport() {
+void Support::sport(){
     int answ;
     cout << "Choose sport type:\n1. Easy\n2. Medium\n3. Hard\n";
     cin >> answ;
-    switch (answ) {
-    case 1: {
-        sport_type = "Easy";
-        break; }
-    case 2: {
-        sport_type = "Medium";
-        break; }
-    case 3: {
-        sport_type = "Hard";
-        break; }
-    default: sport();
+    switch(answ){
+        case 1: {
+            sport_type = "Easy";
+            break; }
+        case 2: {
+            sport_type = "Medium";
+            break; }
+        case 3: {
+            sport_type = "Hard";
+            break; }
+        default: sport();
     }
 }
 
-void Support::psychology() {
+void Support::psychology(){
     int answ;
     cout << "Choose psychologist:\n1. Yo Asakura\n2. Anna Kyoyama\n3. Ren Tao\n";
     cin >> answ;
-    switch (answ) {
-    case 1: {
-        psychologist = "Yo Asakura";
-        break; }
-    case 2: {
-        psychologist = "Anna Kyoyama";
-        break; }
-    case 3: {
-        psychologist = "Ren Tao";
-        break; }
-    default: psychology();
+    switch(answ){
+        case 1: {
+            psychologist = "Yo Asakura";
+            break; }
+        case 2: {
+            psychologist = "Anna Kyoyama";
+            break; }
+        case 3: {
+            psychologist = "Ren Tao";
+            break; }
+        default: psychology();
     }
 }
 
 class The_International {
-public:
-    void qualification(Team& team, int n);
-    void TI(Team& team);
+    public:
+        void qualification(Team& team, int n);
+        void TI(Team& team);
 };
 
 class Team {
     bool is_ready = false;
     string name;
-    string roles[5] = { "Carry", "Mid", "Hard", "Support", "Hard-Support" };
+    string roles[5] = {"Carry", "Mid", "Hard", "Support", "Hard-Support"};
 
-public:
-    bool is_full = false;
-    bool major_participation = false;
-    DPC dpc_invite;
-    The_International international_invite;
-    Support support;
-    Player team[5];
-    int exp = 0;
-    void sign_members(int i);
-    void choose_role();
-    void choose_hero(vector<int> exclude);
-    void choose_name();
+    public:
+        bool is_full = false;
+    	bool major_participation = false;
+        Support support;
+        Player team[5];
+        int exp = 0;
+        void sign_members(int i);
+        void choose_role();
+        void choose_hero(vector<int> exclude);
+        void choose_name();
 };
 
 class Analytics {
-public:
-    void team_analytics(Team& team);
-    void competitor_analytics(Team& team);
+    public:
+        void team_analytics(Team& team);
+        void competitor_analytics(Team& team);
 };
 
 void Analytics::team_analytics(Team& team) {
@@ -157,94 +156,87 @@ void Analytics::competitor_analytics(Team& team) {
         cout << "Your competitor stats: " << stats << endl;
         if (stats > team.exp) {
             cout << "The other team is strong. You need more preparation\n";
-        }
-        else {
+        } else {
             cout << "You seem to be stronger\n";
         }
-    }
-    else {
+    } else {
         cout << "You haven`t visited major\n";
     }
 }
 
-void DPC::bootcamp(Team& team) {
+void DPC::bootcamp(Team& team){
     vector<int> exclude;
     int answ;
 
     cout << "Starting a bootcamp\n";
-    cout << "How many matches do you want to have?\n";
+    cout << "How many matches do you want to have?\n"; 
     cin >> answ;
-    for (int i = 0; i < answ; i++) {
-        int v = rand() % 100;
+    for (int i = 0; i < answ; i++){
+        int v = rand()% 100;
         team.choose_hero(exclude);
-        if (v % 13 == 0) {
+        if (v%13 == 0) {
             cout << "It`s a draw: you have run of time\n";
             team.exp += 5;
-        }
-        else if (v % 2 == 0) {
+        } else if (v%2 == 0) {
             cout << "Victory!\n";
             team.exp += 10;
-        }
-        else {
+        } else {
             cout << "You were defeated\n";
             team.exp += 5;
         }
-    }
+    }  
 }
 
-void DPC::major(Team& team) {
+void DPC::major(Team& team){
     int answ;
     bool state;
     vector<int> exclude;
 
-    cout << "Starting a major\n";
-    for (int i = 0; i < 3; i++) {
-        // на цьому моменті ми кожен раз забираємо 7 героїв 
-        for (int k = 0; k < 7; k++) {
+    cout << "Starting a major\n";                                                                                                                                                                                                         
+    for (int i = 0; i < 3; i++){
+        // ось тут ми забираємо кожного разу 7 героїв 
+        for(int k = 0; k < 7; k++){
             int v = random(0, 39);
             exclude.push_back(v);
         }
         // вивід для моніторингу і демонстрації роботи 
         cout << "Excluded heroes are: ";
-        for (int k = 0; k < exclude.size(); k++) {
+        for(int k = 0; k < exclude.size(); k++){
             cout << heroes_list[exclude[k]] << "; ";
         }
         cout << endl;
         team.choose_hero(exclude);
-        int v = rand() % 100;
-        if (v % 13 == 0) {
+        int v = rand()% 100;
+        if (v%13 == 0) {
             cout << "It`s a draw: you have run of time\n";
             team.exp += 5;
-        }
-        else if (v % 2 == 0) {
+        } else if (v%2 == 0) {
             cout << "Victory!\n";
             team.exp += 10;
-        }
-        else {
+        } else {
             cout << "You were defeated\n";
             team.exp += 5;
         }
     }
 }
 
-void Team::choose_name() {
+void Team::choose_name(){
     cout << "Choose name: ";
     cin >> name;
 }
 
-// тут ми вибираємо героїв , виключаючи з усіх героїв - виключених героїв 
-void Team::choose_hero(vector<int> exclude) {
+// тут ми вибираємо героїв , виключаючи з можливих забанених із массива exclude
+void Team::choose_hero(vector<int> exclude){
     int i = 0;
     bool is_here;
     cout << "Choosen heroes are:\n";
     choose_role();
-    while (i < 5) {
+    while (i < 5){
         int hero = random(0, 39);
-        for (int k = 0; k < exclude.size(); k++) {
+        for (int k = 0; k < exclude.size(); k++){
             if (hero == exclude[k]) {
                 is_here = true;
-            }
-            else is_here = false;
+            } else is_here = false;
         }
 
         if (is_here == false) {
@@ -256,32 +248,13 @@ void Team::choose_hero(vector<int> exclude) {
     }
 }
 
-void Team::choose_role() {
-    vector<int> list;
-    list.push_back(6);
-    bool is_here = false;
-    int i = 0;
-
-    int r;
-    while (i < 5) {
-        int r = random(0, 4);
-        for (int k = 0; k < list.size(); k++) {
-            if (r == list[k]) {
-                is_here = true;
-                break;
-            }
-            else is_here = false;
-        }
-
-        if (is_here == false) {
-            team[i].role = roles[r];
-            list.push_back(r);
-            i++;
-        }
+void Team::choose_role(){
+    for (int i = 0; i < 5; i++){
+        team[i].role = roles[random(0, 4)];
     }
 }
 
-void Team::sign_members(int i) {
+void Team::sign_members(int i){
     cout << "Player #" << i << endl;
     cout << "Enter name: ";
     cin >> team[i].name;
@@ -291,52 +264,49 @@ void Team::sign_members(int i) {
 
 void The_International::qualification(Team& team, int n) {
     vector<int> exclude;
-    for (int i = 0; i < n; i++) {
-        for (int k = 0; k < 7; k++) {
+    for (int i = 0; i < n; i++){
+        for(int k = 0; k < 7; k++){
             int v = random(0, 39);
             exclude.push_back(v);
         }
-
+      
         cout << "Excluded heroes are:sds ";
-        for (int k = 0; k < exclude.size(); k++) {
+        for(int k = 0; k < exclude.size(); k++){
             cout << heroes_list[exclude[k]] << "; ";
         }
         cout << endl;
         team.choose_hero(exclude);
-        int v = rand() % 100;
-        if (v % 13 == 0) {
+        int v = rand()% 100;
+        if (v%13 == 0) {
             cout << "It`s a draw: you have run of time\n";
             team.exp += 5;
-        }
-        else if (v % 2 == 0) {
+        } else if (v%2 == 0) {
             cout << "Victory!\n";
             team.exp += 10;
-        }
-        else {
+        } else {
             cout << "You were defeated\n";
             team.exp += 5;
         }
     }
 }
 
-void The_International::TI(Team& team) {
+void The_International::TI(Team& team){
     int matches;
     vector<int> exclude;
 
     cout << "Welcome to the International!\n";
-    for (int i = 0; i < 3; i++) {
-        for (int k = 0; k < 7; k++) {
+    for (int i = 0; i < 3; i++){
+        for(int k = 0; k < 7; k++){
             int v = random(0, 39);
             exclude.push_back(v);
         }
 
         cout << "Excluded heroes are: ";
-        for (int k = 0; k < exclude.size(); k++) {
+        for(int k = 0; k < exclude.size(); k++){
             cout << heroes_list[exclude[k]] << "; ";
         }
-        cout << endl;
-        team.choose_hero(exclude);
-
+		cout << endl;
+		
         if (stats > team.exp) cout << "Your team was defeated(\n";
         else cout << "You won!\n";
     }
@@ -345,47 +315,48 @@ void The_International::TI(Team& team) {
 class Coach {
     Analytics a_team;
 
-public:
-    void team_sign(Team& team);
-    void prepare_support(Team& team);
-    void DCP(Team& team);
-    void start_ananytics(Team& team);
-    void change_player(Team& team);
-    void TI(Team& team);
+    public:
+        void team_sign(Team& team);
+        void prepare_support(Team& team);
+        
+        void DCP(Team& team, DPC& dpc);
+        void start_ananytics(Team& team);
+        void change_player(Team& team);
+        
+        void TI(Team& team, The_International& TI);
 };
 
-void Coach::team_sign(Team& team) {
+void Coach::team_sign(Team& team){
     cout << "Signing the team\n";
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++){
         team.sign_members(i);
     }
     team.is_full = true;
     cout << "Team is full!\n";
 }
 
-void Coach::prepare_support(Team& team) {
-    int v = rand() % 100;
+void Coach::prepare_support(Team& team){
+    int v = rand()% 100;
     if (v % 2 == 0) {
         team.support.physical();
         team.support.psychology();
-    }
-    else {
+    } else {
         team.support.psychology();
         team.support.physical();
-    }
+    } 
 }
 
-void Coach::DCP(Team& team) {
+void Coach::DCP(Team& team, DPC& dpc){
     cout << "Do you want to visit bootcamp?\n";
     cin >> answ;
-    if (answ == 'y' || answ == 'Y') {
-        team.dpc_invite.bootcamp(team);
+    if (answ == 'y' || answ == 'Y'){
+        dpc.bootcamp(team);
     }
-
+    
     cout << "Are you going to visit major?\n";
     cin >> answ;
-    if (answ == 'y' || answ == 'Y') {
-        team.dpc_invite.major(team);
+    if (answ == 'y' || answ == 'Y'){
+        dpc.major(team);
         team.major_participation = true;
     }
 }
@@ -399,7 +370,7 @@ void Coach::start_ananytics(Team& team) {
     } while (answ == 'y' || answ == 'Y');
 }
 
-void Coach::change_player(Team& team) {
+void Coach::change_player(Team& team){
     int player;
 
     cout << "Which player do you want to change?\n";
@@ -408,47 +379,50 @@ void Coach::change_player(Team& team) {
     team.sign_members(player);
 }
 
-void Coach::TI(Team& team) {
+void Coach::TI(Team& team, The_International& TI){
     int matches;
-    // проверка на участие в турнире выше
+    // перевірка на участі у турнірі major
     if (!team.major_participation) {
-        cout << "You haven`t visited major, now you are about participating in qualifications\n";
+        cout << "You haven`t visited major, now it is a chance to\n";
         cout << "How many matches do you want to have?\n";
         cin >> matches;
-        team.international_invite.qualification(team, matches);
+        TI.qualification(team, matches);
         team.major_participation = true;
-
-        cout << "Do you need analytics?\n";
-        cin >> answ;
-        if (answ == 'y' || answ == 'Y') {
-            start_ananytics(team);
-        }
     }
-
-    team.international_invite.TI(team);
-}
-
-int main() {
-    Team team;
-    Coach coach;
-
-    coach.team_sign(team);
-    coach.prepare_support(team);
-    coach.DCP(team);
 
     cout << "Do you need analytics?\n";
     cin >> answ;
-    if (answ == 'y' || answ == 'Y') {
+    if (answ == 'y' || answ == 'Y'){
+        start_ananytics(team);
+    }
+
+    TI.TI(team);
+}
+
+int main(){
+    Team team;
+    Coach coach;
+
+    DPC dpc;
+    The_International international;
+	
+    coach.team_sign(team);
+    coach.prepare_support(team);
+    coach.DCP(team, dpc);
+    
+    cout << "Do you need analytics?\n";
+    cin >> answ;
+    if (answ == 'y' || answ == 'Y'){
         coach.start_ananytics(team);
     }
 
     cout << "Do you want to change a team member?\n";
     cin >> answ;
-    if (answ == 'y' || answ == 'Y') {
+    if (answ == 'y' || answ == 'Y'){
         coach.change_player(team);
     }
 
-    coach.TI(team);
+    coach.TI(team, international);
 
     return 0;
 }
