@@ -22,7 +22,7 @@ string heroes_list[40] = {"Lina", "Monkey King", "Phantom Assasin", "Pudge", "Sn
 "Slark", "Hoodwink", "Troll Warlord", "Phantom Lancer", "Meepo", "Terrorblade", "Naga Siren", "Weaver", "Viper", "Riki", 
 "Lifestealer", "Sven", "Io"};
 
-//функція рандому , яку я буду потім використовувати
+//функція рандому , яку я буду потім використовувати для вибору героя
 int random(int min, int max) {
     int num = min + rand() % (max - min + 1);
     return num;
@@ -35,7 +35,7 @@ class Player {
         string nickname;
         string hero;
 };
-// клас в який входять 2 функції , параметрами яких є команда
+// клас DCP сезон в який входять 2 методи , параметрами яких є команда
 class DPC {
     public:
         void major(Team& team);
@@ -52,12 +52,12 @@ class Support {
         void sport();
         void psychology();
 };
-
+// метод фізичної підтримки , сюди відноситься харчування + спорт
 void Support::physical(){
     dinner();
     sport();
 }
-
+// обираємо кухню
 void Support::dinner(){
     int answ;
     cout << "Choose cuisine:\n1. Japanese\n2. Korean\n3. Ukrainian\n4. American\n5. Italian\n";
@@ -81,7 +81,7 @@ void Support::dinner(){
         default: dinner();
     }
 }
-
+//обираємо важкість спортивних тренувань
 void Support::sport(){
     int answ;
     cout << "Choose sport type:\n1. Easy\n2. Medium\n3. Hard\n";
@@ -99,7 +99,7 @@ void Support::sport(){
         default: sport();
     }
 }
-
+//обираємо психолога
 void Support::psychology(){
     int answ;
     cout << "Choose psychologist:\n1. Yo Asakura\n2. Anna Kyoyama\n3. Ren Tao\n";
@@ -134,7 +134,7 @@ class Team {
     	bool major_participation = false;
         Support support;
         Player team[5];
-        int exp = 0;
+        int exp = 0;// дана змінна використовуватиметься для аналітики своєї та суперників , вона змінюється від результатів матчу
         void sign_members(int i);
         void choose_role();
         void choose_hero(vector<int> exclude);
@@ -146,25 +146,25 @@ class Analytics {
         void team_analytics(Team& team);
         void competitor_analytics(Team& team);
 };
-
+// тут ми виводимо свою статистику
 void Analytics::team_analytics(Team& team) {
     cout << "Your stats: " << team.exp << endl;
 }
-
+// тут ми виводимо стастистику суперника
 void Analytics::competitor_analytics(Team& team) {
-    if (team.major_participation) {
-        stats = random(10, 100);
+    if (team.major_participation) {// якшо брали участь у major
+        stats = random(10, 100);// рейтинг суперників рандомно вибирається
         cout << "Your competitor stats: " << stats << endl;
-        if (stats > team.exp) {
+        if (stats > team.exp) { //порівнюємо свою статистику з значеннями суперника і виводимо результат
             cout << "The other team is strong. You need more preparation\n";
-        } else {
+        } else { 
             cout << "You seem to be stronger\n";
         }
-    } else {
+    } else { // якшо не брали участь
         cout << "You haven`t visited major\n";
     }
 }
-
+//метод тренувальний табір
 void DPC::bootcamp(Team& team){
     vector<int> exclude;
     int answ;
@@ -172,13 +172,13 @@ void DPC::bootcamp(Team& team){
     cout << "Starting a bootcamp\n";
     cout << "How many matches do you want to have?\n"; 
     cin >> answ;
-    for (int i = 0; i < answ; i++){
-        int v = rand()% 100;
+    for (int i = 0; i < answ; i++){// створюємо приклад проходження турніру
+        int v = rand()% 100;// рандомна змінна від якої залежить результат матчу
         team.choose_hero(exclude);
         if (v%13 == 0) {
             cout << "It`s a draw: you have run of time\n";
             team.exp += 5;
-        } else if (v%2 == 0) {
+        } else if (v%2 == 0) {//якщо число парне 
             cout << "Victory!\n";
             team.exp += 10;
         } else {
