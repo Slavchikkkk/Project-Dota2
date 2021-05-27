@@ -22,6 +22,7 @@ string heroes_list[40] = {"Lina", "Monkey King", "Phantom Assasin", "Pudge", "Sn
 "Slark", "Hoodwink", "Troll Warlord", "Phantom Lancer", "Meepo", "Terrorblade", "Naga Siren", "Weaver", "Viper", "Riki", 
 "Lifestealer", "Sven", "Io"};
 
+//функція рандому , яку я буду потім використовувати
 int random(int min, int max) {
     int num = min + rand() % (max - min + 1);
     return num;
@@ -34,13 +35,13 @@ class Player {
         string nickname;
         string hero;
 };
-
+// клас в який входять 2 функції , параметрами яких є команда
 class DPC {
     public:
         void major(Team& team);
         void bootcamp(Team& team);
 };
-
+// клас підтримка , яка характеризується типом кухні , психологом та видом спортивних тренувань
 class Support {
     string dinner_set;
     string sport_type;
