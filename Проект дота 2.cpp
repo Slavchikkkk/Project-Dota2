@@ -174,8 +174,8 @@ void DPC::bootcamp(Team& team){
     cin >> answ;
     for (int i = 0; i < answ; i++){// створюємо приклад проходження турніру
         int v = rand()% 100;// рандомна змінна від якої залежить результат матчу
-        team.choose_hero(exclude);
-        if (v%13 == 0) {
+        team.choose_hero(exclude);//герої вибираються з вектору exclude
+        if (v%13 == 0) {//13 із-за того що чисел , які діляться на 13 не так і багато а нічия - рідка подія
             cout << "It`s a draw: you have run of time\n";
             team.exp += 5;
         } else if (v%2 == 0) {//якщо число парне 
@@ -196,7 +196,7 @@ void DPC::major(Team& team){
     cout << "Starting a major\n";                                                                                                                                                                                                         
     for (int i = 0; i < 3; i++){
         // ось тут ми забираємо кожного разу 7 героїв 
-        for(int k = 0; k < 7; k++){
+        for(int k = 0; k < 7; k++){//рандомний бан
             int v = random(0, 39);
             exclude.push_back(v);
         }
@@ -226,7 +226,7 @@ void Team::choose_name(){
     cin >> name;
 }
 
-// тут ми вибираємо героїв , виключаючи з можливих забанених із массива exclude
+// тут ми вибираємо героїв , виключаючи з можливих забанених із вектору exclude
 void Team::choose_hero(vector<int> exclude){
     int i = 0;
     bool is_here;
@@ -235,15 +235,16 @@ void Team::choose_hero(vector<int> exclude){
     while (i < 5){
         int hero = random(0, 39);
         for (int k = 0; k < exclude.size(); k++){
-            if (hero == exclude[k]) {
+            if (hero == exclude[k]) {// якщо значення якогось героя = значенню героя з вектору exclude , буде повторюватися , нам треба значення false
                 is_here = true;
+		break;
             } else is_here = false;
         }
 
-        if (is_here == false) {
+        if (is_here == false) {// коли false вибирається герой з списку героїв 
             team[i].hero = heroes_list[hero];
             cout << "   " << team[i].nickname << " - " << team[i].role << " - " << team[i].hero << endl;
-            exclude.push_back(hero);
+            exclude.push_back(hero);// коли вибрався , то цей герой додається в exclude
             i++;
         }
     }
@@ -265,13 +266,13 @@ void Team::sign_members(int i){
 
 void The_International::qualification(Team& team, int n) {
     vector<int> exclude;
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++){// в цьому циклі рандомно банимо героїв
         for(int k = 0; k < 7; k++){
             int v = random(0, 39);
-            exclude.push_back(v);
+            exclude.push_back(v);// додаємо у вектор exclude
         }
       
-        cout << "Excluded heroes are:sds ";
+        cout << "Excluded heroes are:sds ";// виводимо цих героїв
         for(int k = 0; k < exclude.size(); k++){
             cout << heroes_list[exclude[k]] << "; ";
         }
@@ -327,7 +328,7 @@ class Coach {
         void TI(Team& team, The_International& TI);
 };
 
-void Coach::team_sign(Team& team){
+void Coach::team_sign(Team& team){//підписання команди , повторюємо поки не буде повна
     cout << "Signing the team\n";
     for (int i = 0; i < 5; i++){
         team.sign_members(i);
@@ -336,7 +337,7 @@ void Coach::team_sign(Team& team){
     cout << "Team is full!\n";
 }
 
-void Coach::prepare_support(Team& team){
+void Coach::prepare_support(Team& team){//забезпечення команди різноманітною підтримкою
     int v = rand()% 100;
     if (v % 2 == 0) {
         team.support.physical();
