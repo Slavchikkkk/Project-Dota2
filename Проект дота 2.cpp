@@ -251,9 +251,27 @@ void Team::choose_hero(vector<int> exclude){
 }
 
 void Team::choose_role(){
-    for (int i = 0; i < 5; i++){
-        team[i].role = roles[random(0, 4)];
-    }
+vector<int> list;
+	list.push_back(6);
+	bool is_here = false;
+	int i = 0;
+	
+	int r;
+	while (i< 5) {
+		int r = random(0, 4);
+		for (int k = 0; k < list.size(); k++){
+            if (r == list[k]) {// якщо значення ролі = значенню ролі з списку використаних , буде повторюватися , нам треба значення false
+                is_here = true;
+                break;
+            } else is_here = false;
+        }
+
+        if (is_here == false) {
+            team[i].role = roles[r];
+            list.push_back(r);// коли вибрався , то ця роль додається в використані
+            i++;
+        }
+	}
 }
 
 void Team::sign_members(int i){
